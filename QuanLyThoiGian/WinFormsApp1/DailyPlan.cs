@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Npgsql;
+using QuanLyThoiGian;
 
 namespace WinFormsApp1
 {
@@ -111,7 +112,6 @@ namespace WinFormsApp1
                             TimeSpan endTime = reader.GetTimeSpan(3);
                             string eventStatus = reader.GetString(4);
                             string eventNote = reader.GetString(5);
-
                             dataTable.Rows.Add(mask, eventName, startTime, endTime, eventStatus, eventNote);
                         }
                         dataGridView1.DataSource = dataTable;
@@ -134,13 +134,13 @@ namespace WinFormsApp1
                 DialogResult result = MessageBox.Show("Bạn có muốn quay trở lại màn hình chính.?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.No)
                 {
-                    e.Cancel = true; // Ngăn chặn việc đóng form nếu người dùng chọn "No"
+                    e.Cancel = true;
                 }
                 else if (result == DialogResult.Yes)
                 {
-                    Form1 form1 = new Form1(userId); // Tạo instance của Form1 với userId
+                    Form1 form1 = new Form1(userId);
                     form1.Show();
-                    this.Hide();// Hiển thị Form1
+                    this.Hide();
                 }
             }
         }
@@ -156,6 +156,13 @@ namespace WinFormsApp1
                 form1.Show();
                 this.Hide();
             }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            TaoSuKien t = new TaoSuKien(userId);
+            t.Show();
+            this.Hide();
         }
     }
 }

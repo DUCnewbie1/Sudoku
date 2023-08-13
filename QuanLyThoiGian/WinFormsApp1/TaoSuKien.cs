@@ -223,7 +223,6 @@ namespace QuanLyThoiGian
                 int startMinute = (int)comboBox2.SelectedItem;
                 int endHour = (int)comboBox3.SelectedItem;
                 int endMinute = (int)comboBox4.SelectedItem;
-
                 TimeSpan startTime = new TimeSpan(startHour, startMinute, 0);
                 TimeSpan endTime = new TimeSpan(endHour, endMinute, 0);
 

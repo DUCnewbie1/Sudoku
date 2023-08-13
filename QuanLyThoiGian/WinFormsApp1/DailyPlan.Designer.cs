@@ -34,8 +34,10 @@
             btnNextDay = new Button();
             dtpkDate = new DateTimePicker();
             panel1 = new Panel();
+            button2 = new Button();
             button1 = new Button();
             dataGridView1 = new DataGridView();
+            button3 = new Button();
             pnJob.SuspendLayout();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
@@ -44,6 +46,7 @@
             // pnJob
             // 
             pnJob.BackColor = Color.LightGray;
+            pnJob.Controls.Add(button3);
             pnJob.Controls.Add(btnPreviousDay);
             pnJob.Controls.Add(btnNextDay);
             pnJob.Controls.Add(dtpkDate);
@@ -91,6 +94,7 @@
             // panel1
             // 
             panel1.BackColor = Color.DarkGray;
+            panel1.Controls.Add(button2);
             panel1.Controls.Add(button1);
             panel1.Controls.Add(dataGridView1);
             panel1.Controls.Add(pnJob);
@@ -99,6 +103,15 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(967, 372);
             panel1.TabIndex = 0;
+            // 
+            // button2
+            // 
+            button2.Location = new Point(738, 334);
+            button2.Name = "button2";
+            button2.Size = new Size(75, 38);
+            button2.TabIndex = 4;
+            button2.Text = "Chỉnh sửa";
+            button2.UseVisualStyleBackColor = true;
             // 
             // button1
             // 
@@ -119,6 +132,16 @@
             dataGridView1.RowTemplate.Height = 25;
             dataGridView1.Size = new Size(891, 299);
             dataGridView1.TabIndex = 2;
+            // 
+            // button3
+            // 
+            button3.Location = new Point(3, 4);
+            button3.Name = "button3";
+            button3.Size = new Size(92, 30);
+            button3.TabIndex = 4;
+            button3.Text = "Thêm sự kiện";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
             // 
             // DailyPlan
             // 
@@ -149,5 +172,7 @@
         private Panel panel1;
         private DataGridView dataGridView1;
         private Button button1;
+        private Button button2;
+        private Button button3;
     }
 }
