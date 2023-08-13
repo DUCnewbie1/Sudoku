@@ -44,14 +44,25 @@ namespace QuanLyThoiGian
 
         private void button1_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Bạn có muốn hủy tạo sự kiện?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult result = MessageBox.Show("Bạn có muốn hủy tạo sự kiện và trở lại màn hình chính?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
             if (result == DialogResult.Yes)
             {
-                Form1 f = new Form1(currentUserId);
-                f.Show();
+                Form1 form1 = new Form1(userId);
+                form1.Show();
                 this.Hide();
             }
+            else
+            {
+                // Sau khi quay lại form DailyPlan, đảm bảo cập nhật lại dữ liệu
+                if (Application.OpenForms["DailyPlan"] is DailyPlan dailyPlanForm)
+                {
+                    dailyPlanForm.LoadEvents();
+                    dailyPlanForm.Refresh();
+                }
+            }
         }
+
         // chọn giờ bắt đầu
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -180,8 +191,8 @@ namespace QuanLyThoiGian
                             if (Application.OpenForms["DailyPlan"] is DailyPlan dailyPlanForm)
                             {
                                 dailyPlanForm.LoadEvents();
+                                dailyPlanForm.Refresh();
                             }
-                            this.Close(); // Đóng form TaoSuKien
                         }
                         else
                         {

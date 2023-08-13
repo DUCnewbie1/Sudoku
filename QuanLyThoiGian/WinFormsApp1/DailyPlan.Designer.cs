@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DailyPlan));
             pnJob = new Panel();
+            button3 = new Button();
             btnPreviousDay = new Button();
             btnNextDay = new Button();
             dtpkDate = new DateTimePicker();
@@ -37,7 +38,6 @@
             button2 = new Button();
             button1 = new Button();
             dataGridView1 = new DataGridView();
-            button3 = new Button();
             pnJob.SuspendLayout();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
@@ -55,6 +55,16 @@
             pnJob.Name = "pnJob";
             pnJob.Size = new Size(967, 34);
             pnJob.TabIndex = 1;
+            // 
+            // button3
+            // 
+            button3.Location = new Point(3, 4);
+            button3.Name = "button3";
+            button3.Size = new Size(92, 30);
+            button3.TabIndex = 4;
+            button3.Text = "Thêm sự kiện";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
             // 
             // btnPreviousDay
             // 
@@ -133,16 +143,6 @@
             dataGridView1.Size = new Size(891, 299);
             dataGridView1.TabIndex = 2;
             // 
-            // button3
-            // 
-            button3.Location = new Point(3, 4);
-            button3.Name = "button3";
-            button3.Size = new Size(92, 30);
-            button3.TabIndex = 4;
-            button3.Text = "Thêm sự kiện";
-            button3.UseVisualStyleBackColor = true;
-            button3.Click += button3_Click;
-            // 
             // DailyPlan
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -155,6 +155,7 @@
             Name = "DailyPlan";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Lịch trong ngày ";
+            Activated += DailyPlan_Activated_2;
             FormClosing += DailyPlan_FormClosing;
             Load += DailyPlan_Load;
             pnJob.ResumeLayout(false);

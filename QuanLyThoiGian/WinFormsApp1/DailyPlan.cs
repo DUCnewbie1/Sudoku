@@ -69,12 +69,6 @@ namespace WinFormsApp1
             dtpkDate.Value = dtpkDate.Value.AddDays(1);
             LoadEvents();
         }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
         public void LoadEvents()
         {
             using (NpgsqlConnection connection = new NpgsqlConnection(Helper.ConnectionString))
@@ -115,7 +109,6 @@ namespace WinFormsApp1
                             dataTable.Rows.Add(mask, eventName, startTime, endTime, eventStatus, eventNote);
                         }
                         dataGridView1.DataSource = dataTable;
-                        dataGridView1.Refresh();
                     }
                 }
             }
@@ -144,7 +137,6 @@ namespace WinFormsApp1
                 }
             }
         }
-
         // trở lại Form1
         private void button1_Click(object sender, EventArgs e)
         {
@@ -157,12 +149,16 @@ namespace WinFormsApp1
                 this.Hide();
             }
         }
-
         private void button3_Click(object sender, EventArgs e)
         {
             TaoSuKien t = new TaoSuKien(userId);
             t.Show();
             this.Hide();
+        }
+
+        private void DailyPlan_Activated_2(object sender, EventArgs e)
+        {
+            LoadEvents();
         }
     }
 }
