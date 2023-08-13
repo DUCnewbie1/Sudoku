@@ -272,8 +272,15 @@ namespace WinFormsApp1
 
         private void button2_Click(object sender, EventArgs e)
         {
-            TaoSuKien sk = new TaoSuKien();
+            TaoSuKien sk = new TaoSuKien(userId);
             sk.Show();
+            this.Hide();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            DailyPlan dl = new DailyPlan(userId);
+            dl.Show();
             this.Hide();
         }
     }

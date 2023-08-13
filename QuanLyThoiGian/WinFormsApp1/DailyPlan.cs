@@ -13,35 +13,23 @@ namespace WinFormsApp1
 {
     public partial class DailyPlan : Form
     {
-        private DateTime date;
-        private int userId; // Thêm thuộc tính userId
-
-        public DateTime Date
-        {
-            get { return date; }
-            set { date = value; }
-        }
+        private int userId; // Thêm thuộc tính userId}
 
         //Tạo ra một điều khiển chứa các điều khiển con và tự động sắp xếp chúng theo chiều ngang hoặc chiều dọc.
         FlowLayoutPanel fPanel = new FlowLayoutPanel();
 
         // Phương thức khởi tạo của lớp DailyPlan
-        public DailyPlan(DateTime date, int userId) // Thêm tham số userId vào constructor
+        public DailyPlan(int userId) // Thêm tham số userId vào constructor
         {
             // Gọi phương thức InitializeComponent để khởi tạo các điều khiển
             InitializeComponent();
 
-            // Khởi tạo các thuộc tính Date, Job và userId với các giá trị tương ứng
-            this.Date = date;
             this.userId = userId;
 
             // Thiết lập kích thước của fPanel và thêm nó vào pnlJob
             fPanel.Width = pnlJob.Width;
             fPanel.Height = pnlJob.Height;
             pnlJob.Controls.Add(fPanel);
-
-            // Đặt giá trị của dtpkDate bằng giá trị của thuộc tính Date
-            dtpkDate.Value = Date;
         }
 
 
@@ -84,5 +72,57 @@ namespace WinFormsApp1
             // Cộng giá trị của điều khiển nhập liệu ngày tháng năm dtpkDate thêm một ngày
             dtpkDate.Value = dtpkDate.Value.AddDays(1);
         }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void LoadEvents()
+        {
+            using (NpgsqlConnection connection = new NpgsqlConnection(Helper.ConnectionString))
+            {
+                connection.Open();
+
+                string query = "SELECT mask, tensk, thoigianbd, thoigiankt, trangthai, ghichu FROM sukien WHERE sukien_id = @userId";
+
+                using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@userId", userId);
+
+                    using (NpgsqlDataReader reader = command.ExecuteReader())
+                    {
+                        DataTable dataTable = new DataTable();
+                        dataTable.Columns.Add("mask", typeof(int)); // Primary key
+                        dataTable.Columns.Add("tensk", typeof(string));
+                        dataTable.Columns.Add("thoigianbd", typeof(TimeSpan));
+                        dataTable.Columns.Add("thoigiankt", typeof(TimeSpan));
+                        dataTable.Columns.Add("trangthai", typeof(string));
+                        dataTable.Columns.Add("ghichu", typeof(string));
+
+                        while (reader.Read())
+                        {
+                            int eventId = reader.GetInt32(0);
+                            string eventName = reader.GetString(1);
+                            TimeSpan startTime = reader.GetTimeSpan(2);
+                            TimeSpan endTime = reader.GetTimeSpan(3);
+                            string eventStatus = reader.GetString(4);
+                            string eventNote = reader.GetString(5);
+
+                            dataTable.Rows.Add(eventId, eventName, startTime, endTime, eventStatus, eventNote);
+                        }
+
+                        dataGridView1.DataSource = dataTable;
+                    }
+                }
+            }
+        }
+
+        // Phương thức xử lý sự kiện khi form được hiển thị
+        private void DailyPlan_Load(object sender, EventArgs e)
+        {
+            LoadEvents();
+        }
+
     }
 }

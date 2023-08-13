@@ -132,6 +132,7 @@
             dataGridView1.RowTemplate.Height = 25;
             dataGridView1.Size = new Size(957, 282);
             dataGridView1.TabIndex = 0;
+            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
             // panel2
             // 
@@ -249,6 +250,7 @@
             Name = "DailyPlan";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Lịch trong ngày ";
+            Load += DailyPlan_Load;
             panel1.ResumeLayout(false);
             pnJob.ResumeLayout(false);
             pnlJob.ResumeLayout(false);

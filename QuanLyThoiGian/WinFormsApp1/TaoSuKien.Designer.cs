@@ -45,6 +45,10 @@
             endTime = new Label();
             label4 = new Label();
             dateTimePicker2 = new DateTimePicker();
+            label7 = new Label();
+            textBoxGhiChu = new TextBox();
+            comboBox5 = new ComboBox();
+            label8 = new Label();
             SuspendLayout();
             // 
             // label1
@@ -59,7 +63,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(31, 122);
+            label2.Location = new Point(28, 122);
             label2.Name = "label2";
             label2.Size = new Size(78, 15);
             label2.TabIndex = 1;
@@ -79,7 +83,7 @@
             textBox1.Location = new Point(116, 54);
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(199, 23);
-            textBox1.TabIndex = 5;
+            textBox1.TabIndex = 1;
             textBox1.TextChanged += textBox1_TextChanged;
             // 
             // button1
@@ -87,7 +91,7 @@
             button1.Location = new Point(599, 314);
             button1.Name = "button1";
             button1.Size = new Size(75, 23);
-            button1.TabIndex = 6;
+            button1.TabIndex = 11;
             button1.Text = "Hủy";
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
@@ -97,9 +101,10 @@
             button2.Location = new Point(518, 314);
             button2.Name = "button2";
             button2.Size = new Size(75, 23);
-            button2.TabIndex = 7;
+            button2.TabIndex = 10;
             button2.Text = "Lưu";
             button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // label5
             // 
@@ -115,7 +120,7 @@
             dateTimePicker1.Location = new Point(115, 116);
             dateTimePicker1.Name = "dateTimePicker1";
             dateTimePicker1.Size = new Size(200, 23);
-            dateTimePicker1.TabIndex = 10;
+            dateTimePicker1.TabIndex = 3;
             // 
             // label6
             // 
@@ -134,7 +139,7 @@
             comboBox1.Location = new Point(480, 114);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(116, 23);
-            comboBox1.TabIndex = 15;
+            comboBox1.TabIndex = 4;
             comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
             // comboBox2
@@ -143,7 +148,7 @@
             comboBox2.Location = new Point(599, 114);
             comboBox2.Name = "comboBox2";
             comboBox2.Size = new Size(78, 23);
-            comboBox2.TabIndex = 16;
+            comboBox2.TabIndex = 5;
             comboBox2.SelectedIndexChanged += comboBox2_SelectedIndexChanged;
             // 
             // comboBox3
@@ -152,7 +157,7 @@
             comboBox3.Location = new Point(480, 170);
             comboBox3.Name = "comboBox3";
             comboBox3.Size = new Size(116, 23);
-            comboBox3.TabIndex = 17;
+            comboBox3.TabIndex = 7;
             comboBox3.SelectedIndexChanged += comboBox3_SelectedIndexChanged;
             // 
             // comboBox4
@@ -161,7 +166,7 @@
             comboBox4.Location = new Point(599, 170);
             comboBox4.Name = "comboBox4";
             comboBox4.Size = new Size(78, 23);
-            comboBox4.TabIndex = 18;
+            comboBox4.TabIndex = 8;
             comboBox4.SelectedIndexChanged += comboBox4_SelectedIndexChanged;
             // 
             // label3
@@ -185,7 +190,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(28, 178);
+            label4.Location = new Point(31, 178);
             label4.Name = "label4";
             label4.Size = new Size(81, 15);
             label4.TabIndex = 21;
@@ -196,13 +201,50 @@
             dateTimePicker2.Location = new Point(116, 172);
             dateTimePicker2.Name = "dateTimePicker2";
             dateTimePicker2.Size = new Size(200, 23);
-            dateTimePicker2.TabIndex = 22;
+            dateTimePicker2.TabIndex = 6;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(375, 62);
+            label7.Name = "label7";
+            label7.Size = new Size(48, 15);
+            label7.TabIndex = 23;
+            label7.Text = "Ghi chú";
+            // 
+            // textBoxGhiChu
+            // 
+            textBoxGhiChu.Location = new Point(480, 59);
+            textBoxGhiChu.Name = "textBoxGhiChu";
+            textBoxGhiChu.Size = new Size(197, 23);
+            textBoxGhiChu.TabIndex = 2;
+            // 
+            // comboBox5
+            // 
+            comboBox5.FormattingEnabled = true;
+            comboBox5.Location = new Point(116, 241);
+            comboBox5.Name = "comboBox5";
+            comboBox5.Size = new Size(199, 23);
+            comboBox5.TabIndex = 9;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new Point(28, 249);
+            label8.Name = "label8";
+            label8.Size = new Size(59, 15);
+            label8.TabIndex = 26;
+            label8.Text = "Trạng thái";
             // 
             // TaoSuKien
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(687, 349);
+            Controls.Add(label8);
+            Controls.Add(comboBox5);
+            Controls.Add(textBoxGhiChu);
+            Controls.Add(label7);
             Controls.Add(dateTimePicker2);
             Controls.Add(label4);
             Controls.Add(endTime);
@@ -222,6 +264,7 @@
             Controls.Add(label1);
             Name = "TaoSuKien";
             Text = "TaoSuKien";
+            FormClosing += TaoSuKien_FormClosing;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -245,5 +288,9 @@
         private Label endTime;
         private Label label4;
         private DateTimePicker dateTimePicker2;
+        private Label label7;
+        private TextBox textBoxGhiChu;
+        private ComboBox comboBox5;
+        private Label label8;
     }
 }

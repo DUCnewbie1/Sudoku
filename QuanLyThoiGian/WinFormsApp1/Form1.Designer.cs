@@ -47,8 +47,8 @@
             btnMon = new Button();
             panel2 = new Panel();
             button3 = new Button();
-            button2 = new Button();
             button1 = new Button();
+            button2 = new Button();
             HomNay = new Button();
             dtpkDate = new DateTimePicker();
             Nofity = new NotifyIcon(components);
@@ -244,16 +244,7 @@
             button3.TabIndex = 4;
             button3.Text = "Xem danh sách công việc";
             button3.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            button2.Location = new Point(2, 0);
-            button2.Name = "button2";
-            button2.Size = new Size(75, 26);
-            button2.TabIndex = 3;
-            button2.Text = "Tạo sự kiện";
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
+            button3.Click += button3_Click;
             // 
             // button1
             // 
@@ -264,6 +255,16 @@
             button1.Text = "Thông tin tài khoản";
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click_1;
+            // 
+            // button2
+            // 
+            button2.Location = new Point(2, 0);
+            button2.Name = "button2";
+            button2.Size = new Size(75, 26);
+            button2.TabIndex = 3;
+            button2.Text = "Tạo sự kiện";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // HomNay
             // 
