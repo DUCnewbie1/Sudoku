@@ -23,13 +23,7 @@ namespace WinFormsApp1
         {
             // Gọi phương thức InitializeComponent để khởi tạo các điều khiển
             InitializeComponent();
-
             this.userId = userId;
-
-            // Thiết lập kích thước của fPanel và thêm nó vào pnlJob
-            fPanel.Width = pnlJob.Width;
-            fPanel.Height = pnlJob.Height;
-            pnlJob.Controls.Add(fPanel);
         }
 
 
@@ -51,6 +45,7 @@ namespace WinFormsApp1
         {
             // Trừ giá trị của điều khiển nhập liệu ngày tháng năm dtpkDate đi một ngày
             dtpkDate.Value = dtpkDate.Value.AddDays(-1);
+            LoadEvents();
         }
 
 
@@ -71,6 +66,7 @@ namespace WinFormsApp1
         {
             // Cộng giá trị của điều khiển nhập liệu ngày tháng năm dtpkDate thêm một ngày
             dtpkDate.Value = dtpkDate.Value.AddDays(1);
+            LoadEvents();
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -78,16 +74,23 @@ namespace WinFormsApp1
 
         }
 
-        private void LoadEvents()
+        public void LoadEvents()
         {
             using (NpgsqlConnection connection = new NpgsqlConnection(Helper.ConnectionString))
             {
                 connection.Open();
 
-                string query = "SELECT mask, tensk, thoigianbd, thoigiankt, trangthai, ghichu FROM sukien WHERE sukien_id = @userId";
+                // Chuyển đổi ngày từ DateTimePicker thành chuỗi theo định dạng "dd/MM/yyyy"
+                string selectedDate = dtpkDate.Value.ToString("dd/MM/yyyy");
+
+                string query = "SELECT l.mask, s.tensk, s.thoigianbd, s.thoigiankt, s.trangthai, s.ghichu " +
+                               "FROM lich l " +
+                               "INNER JOIN sukien s ON l.mask = s.mask " +
+                               "WHERE l.ngaytaosukien = @selectedDate AND l.id = @userId";
 
                 using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
                 {
+                    command.Parameters.AddWithValue("@selectedDate", selectedDate);
                     command.Parameters.AddWithValue("@userId", userId);
 
                     using (NpgsqlDataReader reader = command.ExecuteReader())
@@ -102,17 +105,17 @@ namespace WinFormsApp1
 
                         while (reader.Read())
                         {
-                            int eventId = reader.GetInt32(0);
+                            int mask = reader.GetInt32(0);
                             string eventName = reader.GetString(1);
                             TimeSpan startTime = reader.GetTimeSpan(2);
                             TimeSpan endTime = reader.GetTimeSpan(3);
                             string eventStatus = reader.GetString(4);
                             string eventNote = reader.GetString(5);
 
-                            dataTable.Rows.Add(eventId, eventName, startTime, endTime, eventStatus, eventNote);
+                            dataTable.Rows.Add(mask, eventName, startTime, endTime, eventStatus, eventNote);
                         }
-
                         dataGridView1.DataSource = dataTable;
+                        dataGridView1.Refresh();
                     }
                 }
             }
@@ -124,5 +127,35 @@ namespace WinFormsApp1
             LoadEvents();
         }
 
+        private void DailyPlan_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                DialogResult result = MessageBox.Show("Bạn có muốn quay trở lại màn hình chính.?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.No)
+                {
+                    e.Cancel = true; // Ngăn chặn việc đóng form nếu người dùng chọn "No"
+                }
+                else if (result == DialogResult.Yes)
+                {
+                    Form1 form1 = new Form1(userId); // Tạo instance của Form1 với userId
+                    form1.Show();
+                    this.Hide();// Hiển thị Form1
+                }
+            }
+        }
+
+        // trở lại Form1
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Bạn có muốn hủy tạo sự kiện và trở lại màn hình chính?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                Form1 form1 = new Form1(userId);
+                form1.Show();
+                this.Hide();
+            }
+        }
     }
 }

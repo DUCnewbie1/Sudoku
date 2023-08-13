@@ -176,7 +176,12 @@ namespace QuanLyThoiGian
                         if (rowsAffected > 0)
                         {
                             MessageBox.Show("Thêm sự kiện và lịch thành công.");
-                            // Reset controls or do other necessary actions
+                            // Gọi lại phương thức LoadEvents() trong form DailyPlan để cập nhật dữ liệu
+                            if (Application.OpenForms["DailyPlan"] is DailyPlan dailyPlanForm)
+                            {
+                                dailyPlanForm.LoadEvents();
+                            }
+                            this.Close(); // Đóng form TaoSuKien
                         }
                         else
                         {
