@@ -28,8 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DailyPlan));
             pnJob = new Panel();
+            button4 = new Button();
             button3 = new Button();
             btnPreviousDay = new Button();
             btnNextDay = new Button();
@@ -38,6 +40,8 @@
             button2 = new Button();
             button1 = new Button();
             dataGridView1 = new DataGridView();
+            notifyIcon1 = new NotifyIcon(components);
+            timer1 = new System.Windows.Forms.Timer(components);
             pnJob.SuspendLayout();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
@@ -46,6 +50,7 @@
             // pnJob
             // 
             pnJob.BackColor = Color.LightGray;
+            pnJob.Controls.Add(button4);
             pnJob.Controls.Add(button3);
             pnJob.Controls.Add(btnPreviousDay);
             pnJob.Controls.Add(btnNextDay);
@@ -55,6 +60,16 @@
             pnJob.Name = "pnJob";
             pnJob.Size = new Size(967, 34);
             pnJob.TabIndex = 1;
+            // 
+            // button4
+            // 
+            button4.Location = new Point(101, 4);
+            button4.Name = "button4";
+            button4.Size = new Size(75, 30);
+            button4.TabIndex = 5;
+            button4.Text = "Hôm nay";
+            button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
             // 
             // button3
             // 
@@ -136,12 +151,19 @@
             // dataGridView1
             // 
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Location = new Point(3, 35);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowTemplate.Height = 25;
             dataGridView1.Size = new Size(891, 299);
             dataGridView1.TabIndex = 2;
+            // 
+            // notifyIcon1
+            // 
+            notifyIcon1.Icon = (Icon)resources.GetObject("notifyIcon1.Icon");
+            notifyIcon1.Text = "notifyIcon1";
+            notifyIcon1.Visible = true;
             // 
             // DailyPlan
             // 
@@ -175,5 +197,8 @@
         private Button button1;
         private Button button2;
         private Button button3;
+        private Button button4;
+        private NotifyIcon notifyIcon1;
+        private System.Windows.Forms.Timer timer1;
     }
 }

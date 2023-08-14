@@ -7,13 +7,13 @@ namespace QuanLyThoiGian
 {
     public partial class TaoSuKien : Form
     {
+        private Form1 Form1;
         private int currentUserId;
         private int userId;
         public TaoSuKien(int userId)
         {
             this.userId = userId;
             InitializeComponent();
-
             // Add hours to the ComboBox
             for (int hour = 0; hour < 24; hour++)
             {
@@ -120,12 +120,6 @@ namespace QuanLyThoiGian
             UpdateEndTimeLabel();
         }
 
-        // nhập tên sự kiện
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void TaoSuKien_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (e.CloseReason == CloseReason.UserClosing)
@@ -133,8 +127,14 @@ namespace QuanLyThoiGian
                 DialogResult result = MessageBox.Show("Bạn có muốn hủy tạo sự kiện?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes)
                 {
-                    Form1 f = new Form1(currentUserId);
-                    f.Show();
+                    if (Application.OpenForms["DailyPlan"] is DailyPlan dailyPlanForm)
+                    {
+                        dailyPlanForm.LoadEvents();
+                        dailyPlanForm.Refresh();
+                    }
+                    Form1 form1 = new Form1(userId);
+                    form1.Show();
+                    this.Hide();
                 }
                 else
                 {
@@ -193,6 +193,9 @@ namespace QuanLyThoiGian
                                 dailyPlanForm.LoadEvents();
                                 dailyPlanForm.Refresh();
                             }
+                            Form1 form1 = new Form1(userId);
+                            form1.Show();
+                            this.Hide();
                         }
                         else
                         {

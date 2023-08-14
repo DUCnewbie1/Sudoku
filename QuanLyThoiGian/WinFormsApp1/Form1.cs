@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Serialization;
+using ToastNotifications;
 
 namespace WinFormsApp1
 {
@@ -32,7 +33,9 @@ namespace WinFormsApp1
 
         private List<string> dateOfWeek = new List<string>() { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
         #endregion
+        private DailyPlan dailyPlanForm;
         private int userId;
+        private Notifier notifier;
         private int MaSK; // Thêm thuộc tính MaSK
         public Form1(int userId)
         {
@@ -272,8 +275,8 @@ namespace WinFormsApp1
 
         private void button2_Click(object sender, EventArgs e)
         {
-            TaoSuKien sk = new TaoSuKien(userId);
-            sk.Show();
+            TaoSuKien t = new TaoSuKien(userId);
+            t.Show();
             this.Hide();
         }
 

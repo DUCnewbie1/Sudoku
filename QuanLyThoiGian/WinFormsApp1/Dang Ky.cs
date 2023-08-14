@@ -142,14 +142,15 @@ namespace WinFormsApp1
             {
                 gioiTinh = "Nữ";
             }
-            else if (!Helper.EmailDung(Email))
-            {
-                MessageBox.Show("Cấu trúc của Email là: 'ten_Email@gmail.com', mời nhập lại");
-                return;
-            }
             else
             {
                 MessageBox.Show("Vui lòng chọn giới tính.");
+                return;
+            }
+            //Kiểm tra cấu trúc Email
+            if (!Helper.EmailDung(Email))
+            {
+                MessageBox.Show("Cấu trúc của Email là: 'ten_Email@gmail.com', mời nhập lại");
                 return;
             }
             // Thực hiện lưu thông tin vào cơ sở dữ liệu
@@ -340,16 +341,14 @@ namespace WinFormsApp1
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-
             try
             {
                 Process.Start(new ProcessStartInfo { FileName = "https://accounts.google.com/signup/v2/createaccount?flowName=GlifWebSignIn&flowEntry=SignUp", UseShellExecute = true });
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("Lỗi không thể mở link: " + ex.Message);
             }
         }
     }
 }
-

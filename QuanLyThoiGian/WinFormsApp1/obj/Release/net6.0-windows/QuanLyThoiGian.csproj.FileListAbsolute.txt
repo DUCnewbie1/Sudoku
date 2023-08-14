@@ -159,3 +159,6 @@ C:\Users\PC\source\repos\HoanThienQLTG\QuanLyThoiGian\WinFormsApp1\obj\Release\n
 C:\Users\PC\source\repos\HoanThienQLTG\QuanLyThoiGian\WinFormsApp1\obj\Release\net6.0-windows\QuanLyThoiGian.pdb
 C:\Users\PC\source\repos\HoanThienQLTG\QuanLyThoiGian\WinFormsApp1\obj\Release\net6.0-windows\QuanLyThoiGian.genruntimeconfig.cache
 C:\Users\PC\source\repos\HoanThienQLTG\QuanLyThoiGian\WinFormsApp1\obj\Release\net6.0-windows\ref\QuanLyThoiGian.dll
+C:\Users\PC\source\repos\HoanThienQLTG\QuanLyThoiGian\WinFormsApp1\bin\Release\net6.0-windows\ToastNotifications.dll
+C:\Users\PC\source\repos\HoanThienQLTG\QuanLyThoiGian\WinFormsApp1\bin\Release\net6.0-windows\ToastNotifications.Messages.dll
+C:\Users\PC\source\repos\HoanThienQLTG\QuanLyThoiGian\WinFormsApp1\bin\Release\net6.0-windows\Microsoft.Toolkit.Uwp.Notifications.dll

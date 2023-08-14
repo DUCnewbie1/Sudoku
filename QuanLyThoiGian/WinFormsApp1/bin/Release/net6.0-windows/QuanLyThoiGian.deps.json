@@ -9,8 +9,11 @@
       "QuanLyThoiGian/1.0.0": {
         "dependencies": {
           "Microsoft.Data.SqlClient": "5.1.1",
+          "Microsoft.Toolkit.Uwp.Notifications": "7.1.3",
           "Npgsql": "7.0.4",
-          "OpenAI.ChatGPT": "2.8.0"
+          "OpenAI.ChatGPT": "2.8.0",
+          "ToastNotifications": "2.5.1",
+          "ToastNotifications.Messages": "2.5.1"
         },
         "runtime": {
           "QuanLyThoiGian.dll": {}
@@ -230,6 +233,17 @@
           }
         }
       },
+      "Microsoft.Toolkit.Uwp.Notifications/7.1.3": {
+        "dependencies": {
+          "System.ValueTuple": "4.5.0"
+        },
+        "runtime": {
+          "lib/net5.0/Microsoft.Toolkit.Uwp.Notifications.dll": {
+            "assemblyVersion": "7.1.0.0",
+            "fileVersion": "7.1.3.1"
+          }
+        }
+      },
       "Microsoft.Win32.SystemEvents/6.0.0": {},
       "Npgsql/7.0.4": {
         "dependencies": {
@@ -359,9 +373,29 @@
       },
       "System.Text.Json/4.7.2": {},
       "System.Threading.Tasks.Extensions/4.5.4": {},
+      "System.ValueTuple/4.5.0": {},
       "System.Windows.Extensions/6.0.0": {
         "dependencies": {
           "System.Drawing.Common": "6.0.0"
+        }
+      },
+      "ToastNotifications/2.5.1": {
+        "runtime": {
+          "lib/net40/ToastNotifications.dll": {
+            "assemblyVersion": "2.5.1.0",
+            "fileVersion": "2.5.1.0"
+          }
+        }
+      },
+      "ToastNotifications.Messages/2.5.1": {
+        "dependencies": {
+          "ToastNotifications": "2.5.1"
+        },
+        "runtime": {
+          "lib/net40/ToastNotifications.Messages.dll": {
+            "assemblyVersion": "2.5.1.0",
+            "fileVersion": "2.5.1.0"
+          }
         }
       }
     }
@@ -497,6 +531,13 @@
       "sha512": "sha512-N4KeF3cpcm1PUHym1RmakkzfkEv3GRMyofVv40uXsQhCQeglr2OHNcUk2WOG51AKpGO8ynGpo9M/kFXSzghwug==",
       "path": "microsoft.sqlserver.server/1.0.0",
       "hashPath": "microsoft.sqlserver.server.1.0.0.nupkg.sha512"
+    },
+    "Microsoft.Toolkit.Uwp.Notifications/7.1.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-A1dglAzb24gjehmb7DwGd07mfyZ1gacAK7ObE0KwDlRc3mayH2QW7cSOy3TkkyELjLg19OQBuhPOj4SpXET9lg==",
+      "path": "microsoft.toolkit.uwp.notifications/7.1.3",
+      "hashPath": "microsoft.toolkit.uwp.notifications.7.1.3.nupkg.sha512"
     },
     "Microsoft.Win32.SystemEvents/6.0.0": {
       "type": "package",
@@ -666,12 +707,33 @@
       "path": "system.threading.tasks.extensions/4.5.4",
       "hashPath": "system.threading.tasks.extensions.4.5.4.nupkg.sha512"
     },
+    "System.ValueTuple/4.5.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-okurQJO6NRE/apDIP23ajJ0hpiNmJ+f0BwOlB/cSqTLQlw5upkf+5+96+iG2Jw40G1fCVCyPz/FhIABUjMR+RQ==",
+      "path": "system.valuetuple/4.5.0",
+      "hashPath": "system.valuetuple.4.5.0.nupkg.sha512"
+    },
     "System.Windows.Extensions/6.0.0": {
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-IXoJOXIqc39AIe+CIR7koBtRGMiCt/LPM3lI+PELtDIy9XdyeSrwXFdWV9dzJ2Awl0paLWUaknLxFQ5HpHZUog==",
       "path": "system.windows.extensions/6.0.0",
       "hashPath": "system.windows.extensions.6.0.0.nupkg.sha512"
+    },
+    "ToastNotifications/2.5.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-0ZBWG0FCPafwbIzNhjWgC0GEOyk51GF3rYWrh5QJ61ZxDEoLgdDsEUt8HMxYN7lRLVt/mWhtgdbe4OmhXfwtkA==",
+      "path": "toastnotifications/2.5.1",
+      "hashPath": "toastnotifications.2.5.1.nupkg.sha512"
+    },
+    "ToastNotifications.Messages/2.5.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-KG4oMi61ShmRuPK3/yAFhUph/rZGYmS8IcsIvF2Fk3np11fQo6ZjdK2XUmFnY9b0oQY9IilxhCmOdVGoOGEeHQ==",
+      "path": "toastnotifications.messages/2.5.1",
+      "hashPath": "toastnotifications.messages.2.5.1.nupkg.sha512"
     }
   }
 }

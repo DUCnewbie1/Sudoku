@@ -33,6 +33,7 @@
             label2 = new Label();
             XacNhan = new Button();
             Huy = new Button();
+            linkLabel1 = new LinkLabel();
             SuspendLayout();
             // 
             // label1
@@ -66,7 +67,7 @@
             // XacNhan
             // 
             XacNhan.ForeColor = Color.Black;
-            XacNhan.Location = new Point(113, 65);
+            XacNhan.Location = new Point(113, 80);
             XacNhan.Name = "XacNhan";
             XacNhan.Size = new Size(75, 23);
             XacNhan.TabIndex = 3;
@@ -76,7 +77,7 @@
             // 
             // Huy
             // 
-            Huy.Location = new Point(200, 65);
+            Huy.Location = new Point(200, 80);
             Huy.Name = "Huy";
             Huy.Size = new Size(75, 23);
             Huy.TabIndex = 4;
@@ -84,11 +85,23 @@
             Huy.UseVisualStyleBackColor = true;
             Huy.Click += Huy_Click;
             // 
+            // linkLabel1
+            // 
+            linkLabel1.AutoSize = true;
+            linkLabel1.Location = new Point(113, 62);
+            linkLabel1.Name = "linkLabel1";
+            linkLabel1.Size = new Size(73, 15);
+            linkLabel1.TabIndex = 5;
+            linkLabel1.TabStop = true;
+            linkLabel1.Text = "Quên Email?";
+            linkLabel1.LinkClicked += linkLabel1_LinkClicked;
+            // 
             // CheckEmail
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(385, 110);
+            Controls.Add(linkLabel1);
             Controls.Add(Huy);
             Controls.Add(XacNhan);
             Controls.Add(label2);
@@ -108,5 +121,6 @@
         private Label label2;
         private Button XacNhan;
         private Button Huy;
+        private LinkLabel linkLabel1;
     }
 }

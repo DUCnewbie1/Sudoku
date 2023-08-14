@@ -44,6 +44,10 @@
               "target": "Package",
               "version": "[5.1.1, )"
             },
+            "Microsoft.Toolkit.Uwp.Notifications": {
+              "target": "Package",
+              "version": "[7.1.3, )"
+            },
             "Npgsql": {
               "target": "Package",
               "version": "[7.0.4, )"
@@ -51,6 +55,14 @@
             "OpenAI.ChatGPT": {
               "target": "Package",
               "version": "[2.8.0, )"
+            },
+            "ToastNotifications": {
+              "target": "Package",
+              "version": "[2.5.1, )"
+            },
+            "ToastNotifications.Messages": {
+              "target": "Package",
+              "version": "[2.5.1, )"
             }
           },
           "imports": [

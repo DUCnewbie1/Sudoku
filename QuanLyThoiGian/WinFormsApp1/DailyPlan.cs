@@ -14,53 +14,26 @@ namespace WinFormsApp1
 {
     public partial class DailyPlan : Form
     {
-        private int userId; // Thêm thuộc tính userId}
-
-        //Tạo ra một điều khiển chứa các điều khiển con và tự động sắp xếp chúng theo chiều ngang hoặc chiều dọc.
+        private int userId;
         FlowLayoutPanel fPanel = new FlowLayoutPanel();
 
         // Phương thức khởi tạo của lớp DailyPlan
-        public DailyPlan(int userId) // Thêm tham số userId vào constructor
+        public DailyPlan(int userId)
         {
-            // Gọi phương thức InitializeComponent để khởi tạo các điều khiển
             InitializeComponent();
             this.userId = userId;
         }
-
-
-        // Phương thức xử lý sự kiện khi người dùng nhấn vào nút mnAddJob
-        private void mnAddJob_Click(object sender, EventArgs e)
+        // Phương thức xử lý sự kiện khi form được hiển thị
+        private void DailyPlan_Load(object sender, EventArgs e)
         {
+            LoadEvents();
         }
-
-
-        // Phương thức xử lý sự kiện khi người dùng nhấn vào nút btnNextDay
-        private void btnNextDay_Click(object sender, EventArgs e)
-        {
-            // Cộng giá trị của điều khiển nhập liệu ngày tháng năm dtpkDate thêm một ngày
-            dtpkDate.Value = dtpkDate.Value.AddDays(1);
-        }
-
         // Phương thức xử lý sự kiện khi người dùng nhấn vào nút btnPreviousDay
         private void btnPreviousDay_Click(object sender, EventArgs e)
         {
             // Trừ giá trị của điều khiển nhập liệu ngày tháng năm dtpkDate đi một ngày
             dtpkDate.Value = dtpkDate.Value.AddDays(-1);
             LoadEvents();
-        }
-
-
-        // Phương thức xử lý sự kiện Edited của một đối tượng AJob
-        void aJob_Edited(object sender, EventArgs e)
-        {
-            // Hiện tại phương thức này chưa được triển khai và không có chức năng gì
-        }
-
-        // Phương thức xử lý sự kiện khi người dùng nhấn vào nút mnsToday
-        private void mnsToday_Click(object sender, EventArgs e)
-        {
-            // Đặt giá trị của điều khiển nhập liệu ngày tháng năm dtpkDate bằng ngày giờ hiện tại
-            dtpkDate.Value = DateTime.Now;
         }
 
         private void btnNextDay_Click_1(object sender, EventArgs e)
@@ -92,11 +65,11 @@ namespace WinFormsApp1
                     {
                         DataTable dataTable = new DataTable();
                         dataTable.Columns.Add("mask", typeof(int)); // Primary key
-                        dataTable.Columns.Add("tensk", typeof(string));
-                        dataTable.Columns.Add("thoigianbd", typeof(TimeSpan));
-                        dataTable.Columns.Add("thoigiankt", typeof(TimeSpan));
-                        dataTable.Columns.Add("trangthai", typeof(string));
-                        dataTable.Columns.Add("ghichu", typeof(string));
+                        dataTable.Columns.Add("eventName", typeof(string));
+                        dataTable.Columns.Add("startTime", typeof(TimeSpan));
+                        dataTable.Columns.Add("endTime", typeof(TimeSpan));
+                        dataTable.Columns.Add("eventStatus", typeof(string));
+                        dataTable.Columns.Add("eventNote", typeof(string));
 
                         while (reader.Read())
                         {
@@ -109,17 +82,16 @@ namespace WinFormsApp1
                             dataTable.Rows.Add(mask, eventName, startTime, endTime, eventStatus, eventNote);
                         }
                         dataGridView1.DataSource = dataTable;
+                        dataGridView1.Columns["mask"].HeaderText = "Mã sự kiện";
+                        dataGridView1.Columns["eventName"].HeaderText = "Tên sự kiện";
+                        dataGridView1.Columns["startTime"].HeaderText = "Thời gian bắt đầu";
+                        dataGridView1.Columns["endTime"].HeaderText = "Thời gian kết thúc";
+                        dataGridView1.Columns["eventStatus"].HeaderText = "Trạng thái";
+                        dataGridView1.Columns["eventNote"].HeaderText = "Ghi chú";
                     }
                 }
             }
         }
-
-        // Phương thức xử lý sự kiện khi form được hiển thị
-        private void DailyPlan_Load(object sender, EventArgs e)
-        {
-            LoadEvents();
-        }
-
         private void DailyPlan_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (e.CloseReason == CloseReason.UserClosing)
@@ -158,6 +130,13 @@ namespace WinFormsApp1
 
         private void DailyPlan_Activated_2(object sender, EventArgs e)
         {
+            LoadEvents();
+        }
+
+        // hiển thị ngày hôm nay
+        private void button4_Click(object sender, EventArgs e)
+        {
+            dtpkDate.Value = DateTime.Today;
             LoadEvents();
         }
     }
