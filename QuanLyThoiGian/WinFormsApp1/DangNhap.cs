@@ -11,11 +11,14 @@ using System.Data.SqlClient;
 using Microsoft.Data.SqlClient;
 using Npgsql;
 using QuanLyThoiGian;
+using Tulpep.NotificationWindow;
+using System.Diagnostics.Tracing;
 
 namespace WinFormsApp1
 {
     public partial class DangNhap : Form
     {
+        private int UserID;
         //Giới hạn kí tự khi điền thông tin đăng nhập
         KiemTraNhapChuoi TKTextBoxHandler;
         KiemTraNhapChuoi MKTextBoxHandler;
@@ -50,7 +53,7 @@ namespace WinFormsApp1
                     {
                         cmd.Parameters.AddWithValue("@tk", tk);
                         cmd.Parameters.AddWithValue("@mk", mk);
-
+                        UserID = Convert.ToInt32(cmd.ExecuteScalar());
                         using (NpgsqlDataReader data = cmd.ExecuteReader())
                         {
                             if (data.Read())
@@ -60,6 +63,12 @@ namespace WinFormsApp1
                                 Form1 form1 = new Form1(userId); // Truyền user id vào Form1
                                 form1.Show();
                                 this.Hide();
+                                int EventCount = CalculateEventCountForCurrentDay();
+                                PopupNotifier popup = new PopupNotifier();
+                                popup.Image = QuanLyThoiGian.Properties.Resources.notification;
+                                popup.TitleText = "Xin chào";
+                                popup.ContentText = $"Hôm nay bạn có {EventCount} sự kiện";
+                                popup.Popup();
                             }
                             else
                             {
@@ -151,6 +160,27 @@ namespace WinFormsApp1
             CE.Show();
             this.Hide();
         }
+        private int CalculateEventCountForCurrentDay()
+        {
+            using (NpgsqlConnection conn = new NpgsqlConnection(Helper.ConnectionString))
+            {
+                conn.Open();
+                // Chuyển đổi ngày từ DateTimePicker thành chuỗi theo định dạng "dd/MM/yyyy"
+                string SelectedDate = DateTime.Today.ToString("dd/MM/yyyy");
+                
+                string query = "SELECT COUNT(*) FROM lich l " +
+                               "INNER JOIN sukien s ON l.mask = s.mask " +
+                               "WHERE l.ngaytaosukien = @selectedDate AND l.id = @userId";
 
+                using (NpgsqlCommand command = new NpgsqlCommand(query, conn))
+                {
+                    command.Parameters.AddWithValue("@selectedDate", SelectedDate);
+                    command.Parameters.AddWithValue("@userId", UserID);
+
+                    int EventCount = Convert.ToInt32(command.ExecuteScalar());
+                    return EventCount;
+                }
+            }
+        }
     }
 }

@@ -1,18 +1,7 @@
-﻿using Microsoft.VisualBasic;
-using Microsoft.VisualBasic.ApplicationServices;
-using QuanLyThoiGian;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Xml.Serialization;
+﻿using QuanLyThoiGian;
 using ToastNotifications;
+using Npgsql;
+using Tulpep.NotificationWindow;
 
 namespace WinFormsApp1
 {
@@ -67,6 +56,7 @@ namespace WinFormsApp1
             }
             SetDefaultDay(); //Dat ngay mac dinh
             AddNumberIntoMatrixByDate(dtpkDate.Value);
+
         }
         private void AddNumberIntoMatrixByDate(DateTime date)
         {

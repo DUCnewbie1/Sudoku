@@ -146,64 +146,69 @@ namespace QuanLyThoiGian
         // lưu thông tin vào bảng sự kiện và bảng lịch
         private void button2_Click(object sender, EventArgs e)
         {
-            string tenSuKien = textBox1.Text;
-            string ngayTaoSuKien = dateTimePicker1.Value.ToString("dd/MM/yyyy");
-            string ngayKetThucSuKien = dateTimePicker2.Value.ToString("dd/MM/yyyy");
-            string trangThai = comboBox5.SelectedItem.ToString();
-            string ghiChu = textBoxGhiChu.Text;
-            string thoiGianBatDau = $"{comboBox1.SelectedItem:D2}:{comboBox2.SelectedItem:D2}";
-            string thoiGianKetThuc = $"{comboBox3.SelectedItem:D2}:{comboBox4.SelectedItem:D2}";
-
-            using (NpgsqlConnection connection = new NpgsqlConnection(Helper.ConnectionString))
+            if (comboBox1.SelectedItem != null && comboBox2.SelectedItem != null && comboBox3.SelectedItem != null && comboBox4.SelectedItem != null)
             {
-                connection.Open();
+                CheckTimeValidity();
+                string TenSuKien = textBox1.Text;
+                string NgayTaoSuKien = dateTimePicker1.Value.ToString("dd/MM/yyyy");
+                string NgayKetThucSuKien = dateTimePicker2.Value.ToString("dd/MM/yyyy");
+                string TrangThai = comboBox5.SelectedItem.ToString();
+                string GhiChu = textBoxGhiChu.Text;
+                string ThoiGianBatDau = $"{comboBox1.SelectedItem:D2}:{comboBox2.SelectedItem:D2}";
+                string ThoiGianKetThuc = $"{comboBox3.SelectedItem:D2}:{comboBox4.SelectedItem:D2}";
 
-                string query = "INSERT INTO sukien (tensk, thoigianbd, thoigiankt, trangthai, ghichu, sukien_id) " +
-                               "VALUES (@tensk, @thoigianbd, @thoigiankt, @trangthai, @ghichu, @sukien_id) " +
-                               "RETURNING mask";
-
-                using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
+                using (NpgsqlConnection connection = new NpgsqlConnection(Helper.ConnectionString))
                 {
-                    command.Parameters.AddWithValue("@tensk", tenSuKien);
-                    command.Parameters.AddWithValue("@thoigianbd", TimeSpan.ParseExact(thoiGianBatDau, "hh\\:mm", null));
-                    command.Parameters.AddWithValue("@thoigiankt", TimeSpan.ParseExact(thoiGianKetThuc, "hh\\:mm", null));
-                    command.Parameters.AddWithValue("@trangthai", trangThai);
-                    command.Parameters.AddWithValue("@ghichu", ghiChu);
-                    command.Parameters.AddWithValue("@sukien_id", userId);
+                    connection.Open();
 
-                    int mask = Convert.ToInt32(command.ExecuteScalar()); // Lấy giá trị mask từ bảng "sukien"
+                    string query = "INSERT INTO sukien (tensk, thoigianbd, thoigiankt, trangthai, ghichu, sukien_id) " +
+                                   "VALUES (@tensk, @thoigianbd, @thoigiankt, @trangthai, @ghichu, @sukien_id) " +
+                                   "RETURNING mask";
 
-                    string insertLichQuery = "INSERT INTO lich (ngaytaosukien, ngayketthucsukien, id, mask) " +
-                                             "VALUES (@ngaytaosukien, @ngayketthucsukien, @id, @mask)";
-
-                    using (NpgsqlCommand insertLichCommand = new NpgsqlCommand(insertLichQuery, connection))
+                    using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
                     {
-                        insertLichCommand.Parameters.AddWithValue("@ngaytaosukien", ngayTaoSuKien);
-                        insertLichCommand.Parameters.AddWithValue("@ngayketthucsukien", ngayKetThucSuKien);
-                        insertLichCommand.Parameters.AddWithValue("@id", userId);
-                        insertLichCommand.Parameters.AddWithValue("@mask", mask);
+                        command.Parameters.AddWithValue("@tensk", TenSuKien);
+                        command.Parameters.AddWithValue("@thoigianbd", TimeSpan.ParseExact(ThoiGianBatDau, "hh\\:mm", null));
+                        command.Parameters.AddWithValue("@thoigiankt", TimeSpan.ParseExact(ThoiGianKetThuc, "hh\\:mm", null));
+                        command.Parameters.AddWithValue("@trangthai", TrangThai);
+                        command.Parameters.AddWithValue("@ghichu", GhiChu);
+                        command.Parameters.AddWithValue("@sukien_id", userId);
 
-                        int rowsAffected = insertLichCommand.ExecuteNonQuery();
-                        if (rowsAffected > 0)
+                        int mask = Convert.ToInt32(command.ExecuteScalar()); // Lấy giá trị mask từ bảng "sukien"
+
+                        string insertLichQuery = "INSERT INTO lich (ngaytaosukien, ngayketthucsukien, id, mask) " +
+                                                 "VALUES (@ngaytaosukien, @ngayketthucsukien, @id, @mask)";
+
+                        using (NpgsqlCommand insertLichCommand = new NpgsqlCommand(insertLichQuery, connection))
                         {
-                            MessageBox.Show("Thêm sự kiện và lịch thành công.");
-                            // Gọi lại phương thức LoadEvents() trong form DailyPlan để cập nhật dữ liệu
-                            if (Application.OpenForms["DailyPlan"] is DailyPlan dailyPlanForm)
+                            insertLichCommand.Parameters.AddWithValue("@ngaytaosukien", NgayTaoSuKien);
+                            insertLichCommand.Parameters.AddWithValue("@ngayketthucsukien", NgayKetThucSuKien);
+                            insertLichCommand.Parameters.AddWithValue("@id", userId);
+                            insertLichCommand.Parameters.AddWithValue("@mask", mask);
+
+                            int rowsAffected = insertLichCommand.ExecuteNonQuery();
+                            if (rowsAffected > 0)
                             {
-                                dailyPlanForm.LoadEvents();
-                                dailyPlanForm.Refresh();
+                                MessageBox.Show("Thêm sự kiện và lịch thành công.");
+                                // Gọi lại phương thức LoadEvents() trong form DailyPlan để cập nhật dữ liệu
+                                if (Application.OpenForms["DailyPlan"] is DailyPlan dailyPlanForm)
+                                {
+                                    dailyPlanForm.LoadEvents();
+                                    dailyPlanForm.Refresh();
+                                }
+                                Form1 form1 = new Form1(userId);
+                                form1.Show();
+                                this.Hide();
                             }
-                            Form1 form1 = new Form1(userId);
-                            form1.Show();
-                            this.Hide();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Thêm sự kiện và lịch thất bại.");
+                            else
+                            {
+                                MessageBox.Show("Thêm sự kiện và lịch thất bại.");
+                            }
                         }
                     }
                 }
             }
+
         }
         private void UpdateSelectedTimeLabel()
         {
@@ -233,14 +238,14 @@ namespace QuanLyThoiGian
         {
             if (comboBox1.SelectedItem != null && comboBox2.SelectedItem != null && comboBox3.SelectedItem != null && comboBox4.SelectedItem != null)
             {
-                int startHour = (int)comboBox1.SelectedItem;
-                int startMinute = (int)comboBox2.SelectedItem;
-                int endHour = (int)comboBox3.SelectedItem;
-                int endMinute = (int)comboBox4.SelectedItem;
-                TimeSpan startTime = new TimeSpan(startHour, startMinute, 0);
-                TimeSpan endTime = new TimeSpan(endHour, endMinute, 0);
+                int StartHour = (int)comboBox1.SelectedItem;
+                int StartMinute = (int)comboBox2.SelectedItem;
+                int EndHour = (int)comboBox3.SelectedItem;
+                int EndMinute = (int)comboBox4.SelectedItem;
+                TimeSpan StartTime = new TimeSpan(StartHour, StartMinute, 0);
+                TimeSpan EndTime = new TimeSpan(EndHour, EndMinute, 0);
 
-                if (startTime >= endTime)
+                if (StartTime >= EndTime)
                 {
                     MessageBox.Show("Thời gian bắt đầu phải nhỏ hơn thời gian kết thúc.");
                 }
