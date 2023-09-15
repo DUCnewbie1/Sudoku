@@ -25,5 +25,6 @@ namespace Sudoku
             CreateMatrix matrixCreator = new CreateMatrix(pnMatrix, sudokuButtons);
             matrixCreator.createMatrix();
         }
+       
     }
 }

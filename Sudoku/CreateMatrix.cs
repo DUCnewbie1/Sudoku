@@ -13,6 +13,7 @@ namespace Sudoku
         private Panel pnMatrix;
         private Button[,] sudokuButtons;
         private SudokuGenerator generator;
+        private bool[,] checkRandom;
 
         // Hàm khởi tạo cho lớp CreateMatrix
         public CreateMatrix(Panel pnMatrix, Button[,] sudokuButtons)
@@ -20,6 +21,7 @@ namespace Sudoku
             this.pnMatrix = pnMatrix;
             this.sudokuButtons = sudokuButtons;
             this.generator = new SudokuGenerator();
+            checkRandom = new bool[9,9];
         }
 
         // Phương thức tạo ma trận
@@ -37,6 +39,8 @@ namespace Sudoku
             {
                 for (int col = 0; col < colCount; col++)
                 {
+                    int row1 = row;
+                    int col1 = col;
                     Button button = new Button();
                     button.Width = cellSize;
                     button.Height = cellSize;
@@ -45,6 +49,19 @@ namespace Sudoku
                     button.Text = board[row, col] == 0 ? "" : board[row, col].ToString();
                     sudokuButtons[row, col] = button;
                     pnMatrix.Controls.Add(button);
+                    checkRandom[row1, col1] = board[row, col] != 0;
+
+                    button.MouseDown += (sender, e) =>
+                    {
+                        if (e.Button == MouseButtons.Left && !checkRandom[row1, col1])
+                        {
+                            IncreaseNumber(sender as Button);
+                        }
+                        else if(e.Button == MouseButtons.Right && !checkRandom[row1, col1])
+                        {
+                            DecreaseNumber(sender as Button);
+                        }
+                    };
 
                     if ((col + 1) % 3 == 0 && col != colCount - 1)
                     {
@@ -57,7 +74,50 @@ namespace Sudoku
                     }
                 }
             }
+
         }
+        // Xu ly click chuột trái
+        private void IncreaseNumber(Button button)
+        {
+            if (!string.IsNullOrEmpty(button.Text))
+            {
+                int value = int.Parse(button.Text);
+                if(value < 9)
+                {
+                    button.Text = (value+1).ToString();
+                }
+                else
+                {
+                    button.Text = "1";
+                }
+            }
+            else
+            {
+                button.Text = "1";
+            }
+        }
+
+        // Xu lý click chuột phải
+        private void DecreaseNumber(Button button)
+        {
+            if (!string.IsNullOrEmpty(button.Text))
+            {
+                int value = int.Parse(button.Text);
+                if (value > 1)
+                {
+                    button.Text = (value - 1).ToString();
+                }
+                else
+                {
+                    button.Text = "";
+                }
+            }
+            else
+            {
+                button.Text = "";
+            }
+        }
+
         // Phương thức vẽ đường kẻ dọc
         private void DrawVerticalLine(int cellSize, int x, int top, int bottom)
         {
@@ -79,5 +139,6 @@ namespace Sudoku
             line.Location = new Point(left, y);
             pnMatrix.Controls.Add(line);
         }
+      
     }
 }

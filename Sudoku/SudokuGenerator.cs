@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Sudoku
 {
@@ -30,9 +31,11 @@ namespace Sudoku
 
                 if (board[row, col] == 0 && solver.IsValid(row, col, num) && KiemTra(board, row, col, num))
                 {
-                    board[row, col] = num;
+                    board[row, col] = num;                  
                     count--;
+                    
                 }
+                
             }
 
             return board;
