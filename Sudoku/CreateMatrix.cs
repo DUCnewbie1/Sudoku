@@ -81,8 +81,4 @@ namespace Sudoku
             pnMatrix.Controls.Add(line);
         }
     }
-
-    
-
-
 }

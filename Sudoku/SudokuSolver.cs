@@ -59,13 +59,18 @@ namespace Sudoku
         {
             // Kiểm tra hàng
             for (int i = 0; i < 9; i++)
-                if (board[row, i] == num)
+                if (board[row, i] == num )
                     return false;
 
             // Kiểm tra cột
             for (int i = 0; i < 9; i++)
-                if (board[i, col] == num)
-                    return false;
+            {
+                if (board[i, col] == num )
+                {
+                   return false;
+                }          
+            }
+                
 
             // Kiểm tra hộp 3x3 mà ô này thuộc về
             int startRow = row - row % 3;
