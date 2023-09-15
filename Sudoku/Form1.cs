@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace Sudoku
 {
-    public partial class Form1 : Form
+    public partial class Form1 : Form   
     {
         private Button[,] sudokuButtons = new Button[9, 9];
 
@@ -19,6 +19,11 @@ namespace Sudoku
             matrixCreator.createMatrix();
         }
 
-       
+        private void btnNewGame_Click(object sender, EventArgs e)
+        {
+            pnMatrix.Controls.Clear();
+            CreateMatrix matrixCreator = new CreateMatrix(pnMatrix, sudokuButtons);
+            matrixCreator.createMatrix();
+        }
     }
 }

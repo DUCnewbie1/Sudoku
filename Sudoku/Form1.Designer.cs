@@ -48,6 +48,7 @@
             this.btnNewGame.TabIndex = 1;
             this.btnNewGame.Text = "New game";
             this.btnNewGame.UseVisualStyleBackColor = true;
+            this.btnNewGame.Click += new System.EventHandler(this.btnNewGame_Click);
             // 
             // btnSolve
             // 

@@ -58,7 +58,6 @@ namespace Sudoku
                 }
             }
         }
-
         // Phương thức vẽ đường kẻ dọc
         private void DrawVerticalLine(int cellSize, int x, int top, int bottom)
         {
