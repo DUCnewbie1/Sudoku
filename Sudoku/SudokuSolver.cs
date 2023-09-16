@@ -19,6 +19,17 @@ namespace Sudoku
         // Phương thức giải quyết Sudoku
         public bool Solve()
         {
+            // Tạo một danh sách các số từ 1 đến 9
+            List<int> numbers = new List<int>();
+            for (int num = 1; num <= 9; num++)
+            {
+                numbers.Add(num);
+            }
+
+            // Xáo trộn danh sách số để có thứ tự ngẫu nhiên
+            Random rng = new Random();
+            numbers = numbers.OrderBy(x => rng.Next()).ToList();
+
             // Duyệt qua từng hàng và cột của bảng
             for (int row = 0; row < 9; row++)
             {
@@ -27,8 +38,7 @@ namespace Sudoku
                     // Kiểm tra nếu ô hiện tại chưa được điền số
                     if (board[row, col] == 0)
                     {
-                        // Thử điền từng số từ 1 đến 9 vào ô
-                        for (int num = 1; num <= 9; num++)
+                        foreach (int num in numbers)
                         {
                             // Kiểm tra nếu số này hợp lệ để điền vào ô
                             if (IsValid(row, col, num))

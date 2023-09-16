@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Sudoku
 {
@@ -22,10 +21,13 @@ namespace Sudoku
         {
             int[,] board = new int[9, 9];
 
-            // Giải quyết ma trận Sudoku 9x9
+            int seed = Guid.NewGuid().GetHashCode();
+            Random random = new Random(seed);
+
+            SudokuSolver solver = new SudokuSolver(board); // Tạo một SudokuSolver mới với ma trận ban đầu
+
             solver.Solve();
 
-            // Sao chép bảng đã giải quyết vào bảng mới
             for (int i = 0; i < 9; i++)
             {
                 for (int j = 0; j < 9; j++)
@@ -34,9 +36,7 @@ namespace Sudoku
                 }
             }
 
-            //Xóa ngẫu nhiên 45 số
-            int countToRemove = 45;
-            Random random = new Random();
+            int countToRemove = 0;
 
             while (countToRemove > 0)
             {
