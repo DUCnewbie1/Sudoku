@@ -49,15 +49,17 @@ namespace Sudoku
                     button.Text = board[row, col] == 0 ? "" : board[row, col].ToString();
                     sudokuButtons[row, col] = button;
                     pnMatrix.Controls.Add(button);
-                    checkRandom[row1, col1] = board[row, col] != 0;
-
+                    if (checkRandom[row1, col1] = board[row, col] != 0)
+                    {
+                        button.BackColor = Color.BurlyWood;
+                    }
                     button.MouseDown += (sender, e) =>
                     {
                         if (e.Button == MouseButtons.Left && !checkRandom[row1, col1])
                         {
                             IncreaseNumber(sender as Button);
                         }
-                        else if(e.Button == MouseButtons.Right && !checkRandom[row1, col1])
+                        else if (e.Button == MouseButtons.Right && !checkRandom[row1, col1])
                         {
                             DecreaseNumber(sender as Button);
                         }
@@ -76,6 +78,7 @@ namespace Sudoku
             }
 
         }
+    
         // Xu ly click chuột trái
         private void IncreaseNumber(Button button)
         {

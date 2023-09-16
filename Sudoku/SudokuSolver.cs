@@ -71,7 +71,6 @@ namespace Sudoku
                 }          
             }
                 
-
             // Kiểm tra hộp 3x3 mà ô này thuộc về
             int startRow = row - row % 3;
             int startCol = col - col % 3;
@@ -82,6 +81,9 @@ namespace Sudoku
 
             return true; // Số này hợp lệ để điền vào ô
         }
+        public int[,] GetBoard()
+        {
+            return board;
+        }
     }
-
 }

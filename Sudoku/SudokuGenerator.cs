@@ -21,52 +21,35 @@ namespace Sudoku
         public int[,] Generate()
         {
             int[,] board = new int[9, 9];
-            int count = 36;
 
-            while (count > 0)
+            // Giải quyết ma trận Sudoku 9x9
+            solver.Solve();
+
+            // Sao chép bảng đã giải quyết vào bảng mới
+            for (int i = 0; i < 9; i++)
+            {
+                for (int j = 0; j < 9; j++)
+                {
+                    board[i, j] = solver.GetBoard()[i, j];
+                }
+            }
+
+            //Xóa ngẫu nhiên 45 số
+            int countToRemove = 45;
+            Random random = new Random();
+
+            while (countToRemove > 0)
             {
                 int row = random.Next(9);
                 int col = random.Next(9);
-                int num = random.Next(1, 10);
 
-                if (board[row, col] == 0 && solver.IsValid(row, col, num) && KiemTra(board, row, col, num))
+                if (board[row, col] != 0)
                 {
-                    board[row, col] = num;                  
-                    count--;
-                    
+                    board[row, col] = 0;
+                    countToRemove--;
                 }
-                
             }
-
             return board;
         }
-
-        private bool KiemTra(int[,] board, int row, int col, int num)
-        {
-            // Kiểm tra hàng và cột
-            for (int i = 0; i < 9; i++)
-            {
-                if (board[row, i] == num || board[i, col] == num)
-                {
-                    return false;
-                }
-            }
-
-            // Kiểm tra ô 3x3
-            int startRow = row - row % 3;
-            int startCol = col - col % 3;
-            for (int i = 0; i < 3; i++)
-            {
-                for (int j = 0; j < 3; j++)
-                {
-                    if (board[i + startRow, j + startCol] == num)
-                    {
-                        return false;
-                    }
-                }
-            }
-            return true;
-        }
     }
-
 }
