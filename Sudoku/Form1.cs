@@ -1,13 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Text;
 using System.Windows.Forms;
 
 namespace Sudoku
 {
-    public partial class Form1 : Form   
+    public partial class Form1 : Form
     {
         private Button[,] sudokuButtons = new Button[9, 9];
-
         public Form1()
         {
             InitializeComponent();
@@ -36,7 +37,7 @@ namespace Sudoku
             {
                 for (int j = 0; j < 9; j++)
                 {
-                    if (int.TryParse(sudokuButtons[i, j].Text, out int num))
+                    if (sudokuButtons[i, j].BackColor == Color.BurlyWood && int.TryParse(sudokuButtons[i, j].Text, out int num))
                     {
                         board[i, j] = num;
                     }
@@ -69,5 +70,41 @@ namespace Sudoku
             }
         }
 
+        private void Hint_Click(object sender, EventArgs e)
+        {
+            List<(int, int)> OTrong = new List<(int, int)>();
+            int[,] board = new int[9, 9];
+            for (int i = 0; i < 9; i++)
+            {
+                for (int j = 0; j < 9; j++)
+                {
+                    if (string.IsNullOrEmpty(sudokuButtons[i, j].Text))
+                    {
+                        OTrong.Add((i, j));
+                    }
+                    else if (int.TryParse(sudokuButtons[i, j].Text, out int num))
+                    {
+                        board[i, j] = num;
+                    }
+                }
+            }
+            if (OTrong.Count > 0)
+            {
+                Random random = new Random();
+                int randomCells = random.Next(0, OTrong.Count);
+                (int row, int col) = OTrong[randomCells];
+                SudokuSolver solver = new SudokuSolver(board);
+                if (solver.Solve())
+                {
+                    int boardValue = solver.GetBoard()[row, col];
+                    sudokuButtons[row, col].Text = boardValue.ToString();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Đã giải xong Sudoku!.");
+
+            }
+        }
     }
 }
