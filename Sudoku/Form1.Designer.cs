@@ -40,7 +40,6 @@
             this.pnMatrix.Name = "pnMatrix";
             this.pnMatrix.Size = new System.Drawing.Size(638, 560);
             this.pnMatrix.TabIndex = 0;
-           
             // 
             // btnNewGame
             // 
@@ -62,6 +61,7 @@
             this.btnSolve.TabIndex = 2;
             this.btnSolve.Text = "Solve";
             this.btnSolve.UseVisualStyleBackColor = true;
+            this.btnSolve.Click += new System.EventHandler(this.btnSolve_Click);
             // 
             // Form1
             // 

@@ -36,7 +36,7 @@ namespace Sudoku
                 }
             }
 
-            int countToRemove = 0;
+            int countToRemove = 36;
 
             while (countToRemove > 0)
             {
