@@ -27,8 +27,12 @@ namespace Sudoku
             pnMatrix.Controls.Clear();
             CreateMatrix matrixCreator = new CreateMatrix(pnMatrix, sudokuButtons);
             matrixCreator.createMatrix();
+            minutes = 0;
+            seconds = 0;
+            labelTime.Text = "0:00";
+            timerDemPhut.Enabled = false;
+            timerDemPhut.Enabled = true;
         }
-
         private void btnSolve_Click(object sender, EventArgs e)
         {
             // Tạo một mảng 2 chiều để lưu trữ giá trị của các ô Sudoku

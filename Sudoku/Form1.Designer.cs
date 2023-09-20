@@ -88,9 +88,9 @@
             this.labelTime.AutoSize = true;
             this.labelTime.Location = new System.Drawing.Point(511, 21);
             this.labelTime.Name = "labelTime";
-            this.labelTime.Size = new System.Drawing.Size(35, 13);
+            this.labelTime.Size = new System.Drawing.Size(28, 13);
             this.labelTime.TabIndex = 4;
-            this.labelTime.Text = "label1";
+            this.labelTime.Text = "0:00";
             // 
             // timerDemPhut
             // 
