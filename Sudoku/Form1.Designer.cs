@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.pnMatrix = new System.Windows.Forms.Panel();
             this.btnNewGame = new System.Windows.Forms.Button();
             this.btnSolve = new System.Windows.Forms.Button();
@@ -37,6 +38,9 @@
             this.labelTime = new System.Windows.Forms.Label();
             this.timerDemPhut = new System.Windows.Forms.Timer(this.components);
             this.label1 = new System.Windows.Forms.Label();
+            this.IconList = new System.Windows.Forms.ImageList(this.components);
+            this.Play = new System.Windows.Forms.Button();
+            this.Mute = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // pnMatrix
@@ -68,7 +72,7 @@
             // 
             // Check
             // 
-            this.Check.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.Check.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.Check.Location = new System.Drawing.Point(165, 12);
             this.Check.Name = "Check";
             this.Check.Size = new System.Drawing.Size(66, 23);
@@ -107,12 +111,48 @@
             this.label1.TabIndex = 5;
             this.label1.Text = "Thời gian:";
             // 
+            // IconList
+            // 
+            this.IconList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("IconList.ImageStream")));
+            this.IconList.TransparentColor = System.Drawing.Color.Transparent;
+            this.IconList.Images.SetKeyName(0, "volume.ico");
+            this.IconList.Images.SetKeyName(1, "volume-mute.ico");
+            // 
+            // Play
+            // 
+            this.Play.BackColor = System.Drawing.SystemColors.Control;
+            this.Play.FlatAppearance.BorderSize = 0;
+            this.Play.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Play.ImageIndex = 0;
+            this.Play.ImageList = this.IconList;
+            this.Play.Location = new System.Drawing.Point(6, 398);
+            this.Play.Name = "Play";
+            this.Play.Size = new System.Drawing.Size(75, 23);
+            this.Play.TabIndex = 6;
+            this.Play.UseVisualStyleBackColor = false;
+            this.Play.Click += new System.EventHandler(this.Play_Click);
+            // 
+            // Mute
+            // 
+            this.Mute.FlatAppearance.BorderSize = 0;
+            this.Mute.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Mute.ImageIndex = 1;
+            this.Mute.ImageList = this.IconList;
+            this.Mute.Location = new System.Drawing.Point(6, 398);
+            this.Mute.Name = "Mute";
+            this.Mute.Size = new System.Drawing.Size(75, 23);
+            this.Mute.TabIndex = 7;
+            this.Mute.UseVisualStyleBackColor = true;
+            this.Mute.Click += new System.EventHandler(this.Mute_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(589, 447);
+            this.Controls.Add(this.Mute);
+            this.Controls.Add(this.Play);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.labelTime);
             this.Controls.Add(this.Check);
@@ -137,6 +177,9 @@
         private System.Windows.Forms.Label labelTime;
         private System.Windows.Forms.Timer timerDemPhut;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ImageList IconList;
+        private System.Windows.Forms.Button Play;
+        private System.Windows.Forms.Button Mute;
     }
 }
 

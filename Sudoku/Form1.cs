@@ -2,18 +2,23 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Text;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace Sudoku
 {
     public partial class Form1 : Form
     {
+        WMPLib.WindowsMediaPlayer wplayer = new WMPLib.WindowsMediaPlayer();
         private Button[,] sudokuButtons = new Button[9, 9];
         private int seconds = 0;
         private int minutes = 0;
         public Form1()
         {
             InitializeComponent();
+            wplayer.URL = "Background Music.mp3";
+            wplayer.settings.autoStart = true;
+            wplayer.settings.setMode("loop", true);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -151,6 +156,21 @@ namespace Sudoku
                 seconds = 0;
             }
             labelTime.Text = $"{minutes}:{seconds:D2}";
+        }
+
+        private void Play_Click(object sender, EventArgs e)
+        {
+            wplayer.settings.volume = 100;
+            Mute.Visible = true;
+            Play.Visible = false;
+        }
+
+        private void Mute_Click(object sender, EventArgs e)
+        {
+            wplayer.settings.volume = 0;
+
+            Mute.Visible = false;
+            Play.Visible = true;
         }
     }
 }
