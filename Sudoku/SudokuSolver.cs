@@ -69,28 +69,25 @@ namespace Sudoku
         {
             // Kiểm tra hàng
             for (int i = 0; i < 9; i++)
-                if (board[row, i] == num )
+                if (i != col && board[row, i] == num)
                     return false;
 
             // Kiểm tra cột
             for (int i = 0; i < 9; i++)
-            {
-                if (board[i, col] == num )
-                {
-                   return false;
-                }          
-            }
-                
-            // Kiểm tra hộp 3x3 mà ô này thuộc về
+                if (i != row && board[i, col] == num)
+                    return false;
+
+            // Kiểm tra hộp 3x3
             int startRow = row - row % 3;
             int startCol = col - col % 3;
             for (int i = 0; i < 3; i++)
                 for (int j = 0; j < 3; j++)
-                    if (board[i + startRow, j + startCol] == num)
+                    if ((i + startRow != row || j + startCol != col) && board[i + startRow, j + startCol] == num)
                         return false;
 
             return true; // Số này hợp lệ để điền vào ô
         }
+
         public int[,] GetBoard()
         {
             return board;

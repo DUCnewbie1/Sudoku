@@ -9,6 +9,8 @@ namespace Sudoku
     public partial class Form1 : Form
     {
         private Button[,] sudokuButtons = new Button[9, 9];
+        private int seconds = 0;
+        private int minutes = 0;
         public Form1()
         {
             InitializeComponent();
@@ -65,46 +67,86 @@ namespace Sudoku
             }
             else
             {
-                // Nếu không thể giải quyết, hiển thị thông báo cho người dùng
                 MessageBox.Show("Không thể giải quyết bảng Sudoku này.");
             }
         }
 
-        private void Hint_Click(object sender, EventArgs e)
+        private void Check_Click(object sender, EventArgs e)
         {
-            List<(int, int)> OTrong = new List<(int, int)>();
             int[,] board = new int[9, 9];
             for (int i = 0; i < 9; i++)
             {
                 for (int j = 0; j < 9; j++)
                 {
-                    if (string.IsNullOrEmpty(sudokuButtons[i, j].Text))
-                    {
-                        OTrong.Add((i, j));
-                    }
-                    else if (int.TryParse(sudokuButtons[i, j].Text, out int num))
+                    if (int.TryParse(sudokuButtons[i, j].Text, out int num))
                     {
                         board[i, j] = num;
                     }
                 }
             }
-            if (OTrong.Count > 0)
+
+            SudokuSolver solver = new SudokuSolver(board);
+            for (int i = 0; i < 9; i++)
             {
-                Random random = new Random();
-                int randomCells = random.Next(0, OTrong.Count);
-                (int row, int col) = OTrong[randomCells];
-                SudokuSolver solver = new SudokuSolver(board);
-                if (solver.Solve())
+                for (int j = 0; j < 9; j++)
                 {
-                    int boardValue = solver.GetBoard()[row, col];
-                    sudokuButtons[row, col].Text = boardValue.ToString();
+                    if (sudokuButtons[i, j].BackColor != Color.BurlyWood && !string.IsNullOrEmpty(sudokuButtons[i, j].Text))
+                    {
+                        if (solver.IsValid(i, j, board[i, j]))
+                        {
+                            sudokuButtons[i, j].BackColor = Color.LightGreen;
+                        }
+                        else
+                        {
+                            sudokuButtons[i, j].BackColor = Color.Red;
+                        }
+                    }
                 }
             }
-            else
+            timer.Interval = 5000; // 4000 ms = 4 s
+            timer.Tick += timer_Tick;
+            timer.Start();
+            CheckCompletion();
+        }
+        private void CheckCompletion()
+        {
+            for (int i = 0; i < 9; i++)
             {
-                MessageBox.Show("Đã giải xong Sudoku!.");
-
+                for (int j = 0; j < 9; j++)
+                {
+                    // Nếu có bất kỳ ô trống nào, trả về false
+                    if (string.IsNullOrEmpty(sudokuButtons[i, j].Text) || sudokuButtons[i, j].BackColor == Color.Red)
+                    {
+                        return;
+                    }
+                }
             }
+            timerDemPhut.Stop();
+            MessageBox.Show($"Chúc mừng, bạn đã hoàn thành Sudoku trong {labelTime.Text}!");
+        }
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            for (int i = 0; i < 9; i++)
+            {
+                for (int j = 0; j < 9; j++)
+                {
+                    if (sudokuButtons[i, j].BackColor != Color.BurlyWood)
+                    {
+                        sudokuButtons[i, j].BackColor = SystemColors.ControlLight;
+                    }
+                }
+            }
+            timer.Stop();
+        }
+        private void timerDemPhut_Tick(object sender, EventArgs e)
+        {
+            seconds++;
+            if (seconds == 60)
+            {
+                minutes++;
+                seconds = 0;
+            }
+            labelTime.Text = $"{minutes}:{seconds:D2}";
         }
     }
 }
