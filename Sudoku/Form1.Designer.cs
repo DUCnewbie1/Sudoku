@@ -45,16 +45,18 @@
             // 
             // pnMatrix
             // 
-            this.pnMatrix.Location = new System.Drawing.Point(87, 57);
+            this.pnMatrix.Location = new System.Drawing.Point(130, 88);
+            this.pnMatrix.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pnMatrix.Name = "pnMatrix";
-            this.pnMatrix.Size = new System.Drawing.Size(425, 364);
+            this.pnMatrix.Size = new System.Drawing.Size(638, 560);
             this.pnMatrix.TabIndex = 0;
             // 
             // btnNewGame
             // 
-            this.btnNewGame.Location = new System.Drawing.Point(12, 12);
+            this.btnNewGame.Location = new System.Drawing.Point(18, 18);
+            this.btnNewGame.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnNewGame.Name = "btnNewGame";
-            this.btnNewGame.Size = new System.Drawing.Size(66, 23);
+            this.btnNewGame.Size = new System.Drawing.Size(99, 35);
             this.btnNewGame.TabIndex = 1;
             this.btnNewGame.Text = "New game";
             this.btnNewGame.UseVisualStyleBackColor = true;
@@ -62,9 +64,10 @@
             // 
             // btnSolve
             // 
-            this.btnSolve.Location = new System.Drawing.Point(84, 12);
+            this.btnSolve.Location = new System.Drawing.Point(126, 18);
+            this.btnSolve.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnSolve.Name = "btnSolve";
-            this.btnSolve.Size = new System.Drawing.Size(75, 23);
+            this.btnSolve.Size = new System.Drawing.Size(112, 35);
             this.btnSolve.TabIndex = 2;
             this.btnSolve.Text = "Solve";
             this.btnSolve.UseVisualStyleBackColor = true;
@@ -73,9 +76,10 @@
             // Check
             // 
             this.Check.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.Check.Location = new System.Drawing.Point(165, 12);
+            this.Check.Location = new System.Drawing.Point(248, 18);
+            this.Check.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Check.Name = "Check";
-            this.Check.Size = new System.Drawing.Size(66, 23);
+            this.Check.Size = new System.Drawing.Size(99, 35);
             this.Check.TabIndex = 3;
             this.Check.Text = "Check";
             this.Check.UseVisualStyleBackColor = false;
@@ -90,9 +94,10 @@
             // labelTime
             // 
             this.labelTime.AutoSize = true;
-            this.labelTime.Location = new System.Drawing.Point(511, 21);
+            this.labelTime.Location = new System.Drawing.Point(766, 32);
+            this.labelTime.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelTime.Name = "labelTime";
-            this.labelTime.Size = new System.Drawing.Size(28, 13);
+            this.labelTime.Size = new System.Drawing.Size(40, 20);
             this.labelTime.TabIndex = 4;
             this.labelTime.Text = "0:00";
             // 
@@ -105,9 +110,10 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(458, 21);
+            this.label1.Location = new System.Drawing.Point(687, 32);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(54, 13);
+            this.label1.Size = new System.Drawing.Size(77, 20);
             this.label1.TabIndex = 5;
             this.label1.Text = "Thời gian:";
             // 
@@ -125,9 +131,10 @@
             this.Play.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Play.ImageIndex = 0;
             this.Play.ImageList = this.IconList;
-            this.Play.Location = new System.Drawing.Point(6, 398);
+            this.Play.Location = new System.Drawing.Point(9, 612);
+            this.Play.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Play.Name = "Play";
-            this.Play.Size = new System.Drawing.Size(75, 23);
+            this.Play.Size = new System.Drawing.Size(112, 35);
             this.Play.TabIndex = 6;
             this.Play.UseVisualStyleBackColor = false;
             this.Play.Click += new System.EventHandler(this.Play_Click);
@@ -138,19 +145,20 @@
             this.Mute.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Mute.ImageIndex = 1;
             this.Mute.ImageList = this.IconList;
-            this.Mute.Location = new System.Drawing.Point(6, 398);
+            this.Mute.Location = new System.Drawing.Point(9, 612);
+            this.Mute.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Mute.Name = "Mute";
-            this.Mute.Size = new System.Drawing.Size(75, 23);
+            this.Mute.Size = new System.Drawing.Size(112, 35);
             this.Mute.TabIndex = 7;
             this.Mute.UseVisualStyleBackColor = true;
             this.Mute.Click += new System.EventHandler(this.Mute_Click);
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(589, 447);
+            this.ClientSize = new System.Drawing.Size(884, 688);
             this.Controls.Add(this.Mute);
             this.Controls.Add(this.Play);
             this.Controls.Add(this.label1);
@@ -159,8 +167,10 @@
             this.Controls.Add(this.btnSolve);
             this.Controls.Add(this.btnNewGame);
             this.Controls.Add(this.pnMatrix);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Sudoku_Nhom7";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

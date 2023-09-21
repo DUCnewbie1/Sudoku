@@ -16,7 +16,7 @@ namespace Sudoku
         public Form1()
         {
             InitializeComponent();
-            wplayer.URL = "Background Music.mp3";
+            wplayer.URL = "Warriors.mp3";// Theme music 1. Background Music, 2. Enemy, 3. Warriors, 4. Believer, 5. Natural
             wplayer.settings.autoStart = true;
             wplayer.settings.setMode("loop", true);
         }

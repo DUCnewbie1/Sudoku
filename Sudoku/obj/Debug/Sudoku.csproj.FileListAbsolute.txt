@@ -66,3 +66,5 @@ C:\Users\PC\Downloads\GameSodoku\Sudoku\Sudoku\obj\Debug\Sudoku.exe
 C:\Users\PC\Downloads\GameSodoku\Sudoku\Sudoku\obj\Debug\Sudoku.pdb
 C:\Users\Admin\source\Sudoku\obj\Debug\Interop.WMPLib.dll
 C:\Users\Admin\source\Sudoku\obj\Debug\Sudoku.csproj.ResolveComReference.cache
+E:\TAILIEUTRUONG\HK5\HK5A\LapTrinhWindow\chua sln winform\nhom 4 nguoi\Sudoku\Sudoku\obj\Debug\Interop.WMPLib.dll
+E:\TAILIEUTRUONG\HK5\HK5A\LapTrinhWindow\chua sln winform\nhom 4 nguoi\Sudoku\Sudoku\obj\Debug\Sudoku.csproj.ResolveComReference.cache
