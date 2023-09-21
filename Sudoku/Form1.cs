@@ -13,6 +13,8 @@ namespace Sudoku
         private Button[,] sudokuButtons = new Button[9, 9];
         private int seconds = 0;
         private int minutes = 0;
+        private int soLanKiemTra = 0;
+        private const int soLanKiemTraToiDa = 3;
         public Form1()
         {
             InitializeComponent();
@@ -37,6 +39,8 @@ namespace Sudoku
             labelTime.Text = "0:00";
             timerDemPhut.Enabled = false;
             timerDemPhut.Enabled = true;
+            soLanKiemTra = 0; 
+            Check.Enabled = true; 
         }
         private void btnSolve_Click(object sender, EventArgs e)
         {
@@ -82,6 +86,7 @@ namespace Sudoku
 
         private void Check_Click(object sender, EventArgs e)
         {
+            soLanKiemTra++;
             int[,] board = new int[9, 9];
             for (int i = 0; i < 9; i++)
             {
@@ -115,6 +120,12 @@ namespace Sudoku
             timer.Interval = 5000; // 4000 ms = 4 s
             timer.Tick += timer_Tick;
             timer.Start();
+            if (soLanKiemTra >= soLanKiemTraToiDa)
+            {
+                Check.Enabled = false;
+                MessageBox.Show("Bạn đã sử dụng hết số lần kiểm tra.");
+            }
+
             CheckCompletion();
         }
         private void CheckCompletion()
